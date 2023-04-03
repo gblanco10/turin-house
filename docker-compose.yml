@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+    backend:
+        build:
+            context: .
+            dockerfile: containers/backend/Dockerfile
+        container_name: house-backend
+        ports:
+            - 127.0.0.1:${API_PORT}:80
+        env_file:
+            - .env
+        environment:
+            MODULE_NAME: main
+            LOG_LEVEL: ${LOG_LEVEL}
+            WORKERS_PER_CORE: 1
+            WEB_CONCURRENCY: 1
