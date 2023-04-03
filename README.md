@@ -1,5 +1,3 @@
-# turin-house
-Find the ideal neighborhood in Turin based on public transportation needs
 # TURIN-HOUSE
 
 Our goal is to provide a convenient way for individuals to find the ideal neighborhood in Turin based on their unique public transportation needs. Our platform streamlines the process of locating the most suitable area by optimizing the search for the best public transportation services available. We are committed to enhancing the experience of navigating Turin's public transportation network by providing a comprehensive tool for locating neighborhoods that meet your specific criteria.
