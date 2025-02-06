@@ -1,7 +1,8 @@
 from typing import List
-from pydantic import BaseModel
 
-from schemas import PointInterest,GeoPoint
+from pydantic import BaseModel
+from schemas import GeoPoint, PointInterest
+
 
 class GetRoutesSchema(BaseModel):
     start:GeoPoint
