@@ -5,20 +5,16 @@
   box-sizing: border-box;
 }
 
-html, body {
+html, body, #root {
   height: 100%;
   font-family: Arial, sans-serif;
-}
-
-#root {
-  height: 100%;
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 .navbar {
@@ -32,11 +28,11 @@ html, body {
   display: flex;
   flex-grow: 1;
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 56px); 
 }
 
 .sidebar {
-  width: 200px;
+  width: 2vw;
   background-color: #f4f4f4;
   padding: 1rem;
   border-right: 1px solid #ddd;
@@ -44,28 +40,26 @@ html, body {
 }
 
 .page-content {
-  display: flex;
   flex-grow: 1;
   height: 100%;
-  width: 100%;
 }
 
 .page-layout {
-  display: flex;
   width: 100%;
   height: 100%;
 }
 
 .controls {
-  width: 30%;
   background-color: #f9f9f9;
   padding: 1rem;
   border-right: 1px solid #ddd;
   height: 100%;
+  width: 30%;
+  display: flex;
+
 }
 
 .map-view {
-  flex-grow: 1;
   height: 100%;
-  width: 100%;
+  width: 70%;
 }
