@@ -14,10 +14,13 @@ The following instructions are needed to setup the repo
 
 ```bash
 # Clone this repository
-$ git clone 
+$ git clone https://github.com/gblanco10/turin-house.git
 
 # Go into the repository
 $ cd turin-house
+
+# Prepare GTT Data
+$ bash prepare_data.sh
 
 #Setup containers
 $ docker-compose up --build
