@@ -1,0 +1,65 @@
+/* Stile di base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+.navbar {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.main-layout {
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+  height: calc(100vh - 56px); 
+}
+
+.sidebar {
+  width: 2vw;
+  background-color: #f4f4f4;
+  padding: 1rem;
+  border-right: 1px solid #ddd;
+  height: 100%;
+}
+
+.page-content {
+  flex-grow: 1;
+  height: 100%;
+}
+
+.page-layout {
+  width: 100%;
+  height: 100%;
+}
+
+.controls {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-right: 1px solid #ddd;
+  height: 100%;
+  width: 30%;
+  display: flex;
+
+}
+
+.map-view {
+  height: 100%;
+  width: 70%;
+}

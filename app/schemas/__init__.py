@@ -24,6 +24,7 @@ class PointInterest(BaseModel):
     name:str
     point:GeoPoint
     tolerance:float
+    walk: float
 
 class BusRide(BaseModel):
     climb_code: int

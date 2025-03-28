@@ -137,3 +137,5 @@ notebooks
 gtt_gtfs_data
 debug
 .DS_Store
+envs/*
+!envs/env.template

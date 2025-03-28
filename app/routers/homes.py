@@ -27,7 +27,7 @@ async def find_homes(
     try:
         for poi in request.pois:
             poi.point = transform(data_store.wgs_to_utm, poi.point)
-        result_df = get_homes_area(request.pois, request.radius, request.walk, request.metro)
+        result_df = get_homes_area(request.pois, request.metro)
         # TODO fix the shapefile response
         if request.response_format == 'shapefile':
             out_buffer = BytesIO()
