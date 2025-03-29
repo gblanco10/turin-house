@@ -65,7 +65,7 @@ const Home = () => {
 
   return (
     <Grid container direction={'row'} className="page-layout">
-      <Grid item xs={4} style={{ border: '1px solid red', display: 'flex', flexDirection: 'column', height: "100%", overflowY: 'hidden' }} className="controls">
+      <Grid item xs={4} style={{ display: 'flex', flexDirection: 'column', height: "100%", overflowY: 'hidden' }} className="controls">
         <Box style={{ width: '100%', display: "flex", flexDirection: "column", height: "100%" }}>
           {
             selectedPois.length === 0 ? (
@@ -77,7 +77,7 @@ const Home = () => {
             ) : (null
             )
           }
-          <Box style={{ border: '2px solid blue', width: '100%' }}>
+          <Box style={{ width: '100%' }}>
             <Button variant="outlined" startIcon={<AddIcon />} onClick={() => {
               setPois([...selectedPois, { name: "", point: null, tolerance: 0, walk: 0 }]);
             }}>
@@ -86,7 +86,6 @@ const Home = () => {
           </Box>
           <Box
             style={{
-              border: '2px solid green',
               overflowY: 'auto', // Corretto: 'auto' per mostrare scroll solo quando necessario
               flexGrow: 1, // Importante: permette al contenitore di espandersi
               width: '100%',
@@ -201,7 +200,7 @@ const Home = () => {
             </Box>
           </Box>
           {selectedPois.length > 0 ? (
-            <Grid item xs={12} style={{ border: "2px solid yellow", }}>
+            <Grid item xs={12} >
               <Grid container direction={"row"} alignContent={"center"} justify={"center"}>
                 <Grid item>
                   <Button variant="contained" color="primary" loading={requestState.loading} startIcon={<SendIcon />} onClick={() => {

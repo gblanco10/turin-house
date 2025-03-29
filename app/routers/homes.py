@@ -20,7 +20,7 @@ router = APIRouter(
 )
 
 
-@router.post("/")
+@router.post("")
 async def find_homes(
     request: GetHomesSchema
 ):

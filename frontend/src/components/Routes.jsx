@@ -1,17 +1,18 @@
 import React from "react";
 import MapView from "./MapView";
+import Grid from '@mui/material/Grid2';
 
 const RoutesPage = () => {
   return (
-    <div className="page-layout">
-      <div className="controls">
+    <Grid container direction={'row'} className="page-layout">
+      <Grid item xs={4} style={{ display: 'flex', flexDirection: 'column', height: "100%", overflowY: 'hidden' }} className="controls">
         <h2>Routes Page Controls</h2>
         <p>Qui puoi aggiungere controlli per gestire percorsi.</p>
-      </div>
-      <div className="map-view">
+      </Grid>
+      <Grid container className="map-view">
         <MapView />
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 };
 

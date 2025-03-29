@@ -37,7 +37,7 @@ const MapView = ({ onMapClick, pois, geoJsonData }) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <MapClickHandler />
-        {pois.map((poi, index) =>
+        {pois && pois.map((poi, index) =>
           poi.point ? (
             <Marker key={index} position={[poi.point[1], poi.point[0]]} icon={defaultIcon}>
               <Popup>

@@ -19,7 +19,7 @@ router = APIRouter(
 )
 
 
-@router.post("/", response_model=Dict[str, List[Itinerary]])
+@router.post("", response_model=Dict[str, List[Itinerary]])
 async def find_routes(
     route: GetRoutesSchema
 ):

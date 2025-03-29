@@ -41,6 +41,13 @@ cmd_build(){
     execute build $Target $@
 }
 
+cmd_clean(){
+    echo "Building images..."
+    Target=$1
+    shift
+    docker compose -f docker/docker-compose.base.yml -f docker/docker-compose.$Target.yml down -v --rmi all
+}
+
 cmd_run(){
     echo "Running project..."
     Target=$1
