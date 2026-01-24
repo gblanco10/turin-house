@@ -3,6 +3,7 @@ from typing import List
 import geopandas as gpd
 from config import data_store
 from schemas import PointInterest
+from schemas.homes import OSMPoisRequest
 from shapely import intersection_all
 from shapely.geometry import LineString, Point, Polygon
 from shapely.ops import unary_union
@@ -53,6 +54,7 @@ def get_line_portion(
 def get_homes_area(
         pois: List[PointInterest],
         metro: int = None,
+        osm: OSMPoisRequest = None
 ):
     data = data_store.routes
     layers = []
@@ -67,6 +69,12 @@ def get_homes_area(
         metro_data = data[metro_mask].copy()
         metro_poly = unary_union(metro_data['geometry'].apply(lambda x: x.buffer(metro)))
         layers.append(metro_poly)
+    if osm is not None:
+        for poi_type, distance in osm.dict().items():
+            if distance > 0 and poi_type in data_store.osm_pois:
+                osm_poi_data = data_store.osm_pois[poi_type].copy()
+                osm_poi_poly = unary_union(osm_poi_data['geometry'].apply(lambda x: x.buffer(distance)))
+                layers.append(osm_poi_poly)
     result = intersection_all(layers)
     lines = data.copy()
     lines.drop(columns=["Stop codes"], inplace=True)

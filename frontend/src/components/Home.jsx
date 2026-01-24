@@ -16,12 +16,20 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import Slider from '@mui/material/Slider';
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
+import ParkIcon from '@mui/icons-material/Park';
+import LocalPharmacyIcon from '@mui/icons-material/LocalPharmacy';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import MetroSvg from '../assets/metro.svg';
 import FlagIcon from '@mui/icons-material/Flag';
 
 const Home = () => {
   const [selectedPois, setPois] = useState([]);
   const [metroValue, setMetroValue] = useState(0);
+  const [greenAreaValue, setGreenAreaValue] = useState(0);
+  const [pharmacyValue, setPharmacyValue] = useState(0);
+  const [fitnessCenterValue, setFitnessCenterValue] = useState(0);
+  const [groceryStoreValue, setGroceryStoreValue] = useState(0);
   const [activeIndex, setActiveIndex] = useState(null); // Tiene traccia di quale POI sta selezionando la posizione
   const [requestState, sendRequest, resetState] = useBackend('HOMES');
 
@@ -194,6 +202,82 @@ const Home = () => {
                         sx={{ flexGrow: 1 }} // Assicura che occupi tutta la larghezza
                       />
                     </Stack>
+                    <Stack spacing={1} direction="row" sx={{ alignItems: 'center', mb: 0.5, width: "90%", marginLeft: 1 }}>
+                      <Tooltip title="Maximum distance to Green Areas">
+                        <ParkIcon />
+                      </Tooltip>
+                      <Slider
+                        aria-label="Green Area"
+                        value={greenAreaValue}
+                        valueLabelDisplay="auto"
+                        shiftStep={100}
+                        step={100}
+                        marks
+                        min={0}
+                        max={2000}
+                        onChange={(event, newValue) => {
+                          setGreenAreaValue(newValue);
+                        }}
+                        sx={{ flexGrow: 1 }} // Assicura che occupi tutta la larghezza
+                      />
+                    </Stack>
+                    <Stack spacing={1} direction="row" sx={{ alignItems: 'center', mb: 0.5, width: "90%", marginLeft: 1 }}>
+                      <Tooltip title="Maximum distance to Pharmacy">
+                        <LocalPharmacyIcon />
+                      </Tooltip>
+                      <Slider
+                        aria-label="Pharmacy"
+                        value={pharmacyValue}
+                        valueLabelDisplay="auto"
+                        shiftStep={100}
+                        step={100}
+                        marks
+                        min={0}
+                        max={2000}
+                        onChange={(event, newValue) => {
+                          setPharmacyValue(newValue);
+                        }}
+                        sx={{ flexGrow: 1 }} // Assicura che occupi tutta la larghezza
+                      />
+                    </Stack>
+                    <Stack spacing={1} direction="row" sx={{ alignItems: 'center', mb: 0.5, width: "90%", marginLeft: 1 }}>
+                      <Tooltip title="Maximum distance to Grocery Store">
+                        <LocalGroceryStoreIcon />
+                      </Tooltip>
+                      <Slider
+                        aria-label="Grocery Store"
+                        value={groceryStoreValue}
+                        valueLabelDisplay="auto"
+                        shiftStep={100}
+                        step={100}
+                        marks
+                        min={0}
+                        max={2000}
+                        onChange={(event, newValue) => {
+                          setGroceryStoreValue(newValue);
+                        }}
+                        sx={{ flexGrow: 1 }} // Assicura che occupi tutta la larghezza
+                      />
+                    </Stack>
+                    <Stack spacing={1} direction="row" sx={{ alignItems: 'center', mb: 0.5, width: "90%", marginLeft: 1 }}>
+                      <Tooltip title="Maximum distance to Fitness Center">
+                        <FitnessCenterIcon />
+                      </Tooltip>
+                      <Slider
+                        aria-label="Fitness Center"
+                        value={fitnessCenterValue}
+                        valueLabelDisplay="auto"
+                        shiftStep={100}
+                        step={100}
+                        marks
+                        min={0}
+                        max={2000}
+                        onChange={(event, newValue) => {
+                          setFitnessCenterValue(newValue);
+                        }}
+                        sx={{ flexGrow: 1 }} // Assicura che occupi tutta la larghezza
+                      />
+                    </Stack>
                   </Grid>
                 ) : (null)
               }
@@ -205,7 +289,17 @@ const Home = () => {
                 <Grid item>
                   <Button variant="contained" color="primary" loading={requestState.loading} startIcon={<SendIcon />} onClick={() => {
                     console.log("Send", selectedPois);
-                    sendRequest({ pois: selectedPois, metro: metroValue });
+                    sendRequest(
+                      {
+                        pois: selectedPois,
+                        metro: metroValue,
+                        osm: {
+                          green_area: greenAreaValue,
+                          pharmacy: pharmacyValue,
+                          fitness_center: fitnessCenterValue,
+                          grocery: groceryStoreValue 
+                        }
+                      });
                   }
                   }>
                     Send

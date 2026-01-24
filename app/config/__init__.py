@@ -13,7 +13,7 @@ class Config(BaseSettings):
     api_prefix:str = ""
     api_secret:str
 
-    data_path:Path = Path("/data/gtt_data.geojson")
+    data_path:Path = Path("/data")
 
     @validator('api_prefix')
     def api_prefix_must_start_with_slash(cls,v):
@@ -37,7 +37,12 @@ class DataStore():
         self.utm_to_wgs = pyproj.Transformer.from_crs(utm, wgs84, always_xy=True).transform
 
         logger.info("Loading data")
-        self.routes = gpd.read_file(cfg.data_path).to_crs(crs=utm)
+        self.routes = gpd.read_file(cfg.data_path / "gtt_data.geojson").to_crs(crs=utm)
+        osm_pois = {}
+        for file in (cfg.data_path / "osm").iterdir():
+            poi_name = file.stem
+            osm_pois[poi_name] = gpd.read_file(file).to_crs(crs=utm)
+        self.osm_pois = osm_pois
         logger.info("Loading data completed")
 
 config = Config()

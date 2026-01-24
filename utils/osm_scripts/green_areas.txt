@@ -1,0 +1,12 @@
+[out:json][timeout:25];
+// Cerchiamo l'area con nome Torino e livello amministrativo 8 (Comune)
+area["name"="Torino"]["admin_level"="8"]->.searchArea;
+(
+  way["leisure"="park"](area.searchArea);
+  way["landuse"="grass"](area.searchArea);
+  way["landuse"="forest"](area.searchArea);
+  relation["leisure"="park"](area.searchArea);
+);
+out body;
+>;
+out skel qt;

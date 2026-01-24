@@ -1,0 +1,10 @@
+[out:json][timeout:30];
+area["name"="Torino"]["admin_level"="8"]->.searchArea;
+(
+  // Palestre e centri fitness
+  node["leisure"="fitness_centre"](area.searchArea);
+  node["sport"="fitness"](area.searchArea);
+);
+out body;
+>;
+out skel qt;
