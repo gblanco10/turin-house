@@ -86,3 +86,4 @@ with open(str(args.OUT / f"{args.NAME}.geojson"), 'w', encoding='utf-8') as file
     file.write(gdf_dump)
 
 print("Done")
+# TODO remove night lines 

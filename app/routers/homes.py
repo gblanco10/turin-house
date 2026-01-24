@@ -27,7 +27,7 @@ async def find_homes(
     try:
         for poi in request.pois:
             poi.point = transform(data_store.wgs_to_utm, poi.point)
-        result_df = get_homes_area(request.pois, request.metro)
+        result_df, lines_df = get_homes_area(request.pois, request.metro)
         # TODO fix the shapefile response
         if request.response_format == 'shapefile':
             out_buffer = BytesIO()
@@ -43,7 +43,7 @@ async def find_homes(
             )
         else:
             # Convert to geojson
-            return json.loads(result_df.to_json())
+            return {"area":json.loads(result_df.to_json()), "lines": json.loads(lines_df.to_json())}
     except ValidationError as e:
         logger.error(e)
         raise HTTPException(*GenericErrorCodes.VALIDATION.value)

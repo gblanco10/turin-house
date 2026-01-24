@@ -23,6 +23,8 @@ const reducer = (currentState, action) => {
                 isLoading: false,
                 error:true
             }
+        case 'CLEAR':
+            return initialState
     }
     return initialState
 }
@@ -30,6 +32,10 @@ const reducer = (currentState, action) => {
 const useBackend = (endpoint) => {
 
     const [fetchState, dispatch] = useReducer(reducer, initialState)
+
+    const clearState = () => {
+        dispatch({ type: 'CLEAR' })
+    }
 
     const fetchHomes = (args) => {
         dispatch({ type: 'FETCH' })
@@ -51,9 +57,9 @@ const useBackend = (endpoint) => {
             })
     }
     if (endpoint === 'HOMES')
-        return [fetchState,fetchHomes]
+        return [fetchState,fetchHomes, clearState]
     else
-        return [fetchState,fetchRoutes]
+        return [fetchState,fetchRoutes, clearState]
 }
 
 export default useBackend;

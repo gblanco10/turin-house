@@ -23,7 +23,7 @@ const Home = () => {
   const [selectedPois, setPois] = useState([]);
   const [metroValue, setMetroValue] = useState(0);
   const [activeIndex, setActiveIndex] = useState(null); // Tiene traccia di quale POI sta selezionando la posizione
-  const [requestState, sendRequest] = useBackend('HOMES');
+  const [requestState, sendRequest, resetState] = useBackend('HOMES');
 
   const handleToleranceChange = (index, newValue) => {
     setPois((prevPois) => {
@@ -121,7 +121,7 @@ const Home = () => {
                       </Grid>
                       <Grid item>
                         <Stack spacing={1} direction="row" sx={{ alignItems: 'center', mb: 0.5 }}>
-                          <Tooltip title="Maximum home-station distance">
+                          <Tooltip title="Maximum home - departing bus stop distance">
                             <DirectionsWalkIcon />
                           </Tooltip>
                           <Slider
@@ -142,7 +142,7 @@ const Home = () => {
                       </Grid>
                       <Grid item>
                         <Stack spacing={1} direction="row" sx={{ alignItems: 'center', mb: 0.5 }}>
-                          <Tooltip title="Maximum station-POI distance">
+                          <Tooltip title="Maximum arrival bus stop - POI distance">
                             <FlagIcon />
                           </Tooltip>
                           <Slider
@@ -174,8 +174,8 @@ const Home = () => {
               }
               {
                 selectedPois.length > 0 ? (
-                  <Grid container direction={"row"} sx={{flexGrow: 1}}>
-                    <Stack spacing={1} direction="row" sx={{ alignItems: 'center', mb: 0.5, width: "90%", marginLeft:1 }}>
+                  <Grid container direction={"row"} sx={{ flexGrow: 1 }}>
+                    <Stack spacing={1} direction="row" sx={{ alignItems: 'center', mb: 0.5, width: "90%", marginLeft: 1 }}>
                       <Tooltip title="Maximum distance to Metro">
                         <img src={MetroSvg} alt="Metro" width={20} height={20} />
                       </Tooltip>
@@ -191,7 +191,7 @@ const Home = () => {
                         onChange={(event, newValue) => {
                           setMetroValue(newValue);
                         }}
-                        sx={{ flexGrow:1 }} // Assicura che occupi tutta la larghezza
+                        sx={{ flexGrow: 1 }} // Assicura che occupi tutta la larghezza
                       />
                     </Stack>
                   </Grid>
@@ -214,6 +214,8 @@ const Home = () => {
                 <Grid item>
                   <Button variant="contained" color="secondary" startIcon={<DeleteIcon />} loading={requestState.loading} onClick={() => {
                     setPois([]);
+                    resetState();
+                    setMetroValue(0);
                   }
                   }>
                     Clear
@@ -254,7 +256,7 @@ const Home = () => {
             </span>
           </div>
         )}
-        <MapView onMapClick={handleMapClick} pois={selectedPois} geoJsonData={requestState.loading ? null : requestState.result} />
+        <MapView onMapClick={handleMapClick} pois={selectedPois} geoJsonData={requestState.loading ? null : requestState.result}/>
       </Grid>
     </Grid>
   );
