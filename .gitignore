@@ -139,3 +139,4 @@ debug
 .DS_Store
 envs/*
 !envs/env.template
+.claude
