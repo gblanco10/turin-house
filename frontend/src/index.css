@@ -1,4 +1,3 @@
-/* Stile di base */
 * {
   margin: 0;
   padding: 0;
@@ -17,31 +16,50 @@ html, body, #root {
   height: 100vh;
 }
 
-.navbar {
-  background-color: #333;
-  color: white;
-  padding: 1rem;
-  text-align: center;
-}
-
 .main-layout {
   display: flex;
-  flex-grow: 1;
+  flex: 1;
   width: 100%;
-  height: calc(100vh - 56px); 
+  overflow: hidden;
 }
 
 .sidebar {
-  width: 2vw;
-  background-color: #f4f4f4;
-  padding: 1rem;
-  border-right: 1px solid #ddd;
+  width: 220px;
+  min-width: 220px;
+  background-color: #EEF2FA;
+  border-right: 1px solid #C8D4EE;
+  box-shadow: 2px 0 6px rgba(0, 61, 165, 0.08);
   height: 100%;
+  overflow-y: auto;
+}
+
+.nav-item {
+  display: block;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  margin: 2px 8px;
+  transition: background-color 0.15s;
+}
+
+.nav-item:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.nav-item--active {
+  background-color: rgba(0, 61, 165, 0.12);
+  color: #003DA5;
+}
+
+.nav-item--active:hover {
+  background-color: rgba(0, 61, 165, 0.18);
 }
 
 .page-content {
-  flex-grow: 1;
+  flex: 1;
   height: 100%;
+  overflow: hidden;
 }
 
 .page-layout {
@@ -51,15 +69,124 @@ html, body, #root {
 
 .controls {
   background-color: #f9f9f9;
-  padding: 1rem;
+  padding: 12px;
   border-right: 1px solid #ddd;
   height: 100%;
-  width: 30%;
+  width: 320px;
+  min-width: 280px;
   display: flex;
-
+  flex-direction: column;
+  overflow-y: hidden;
 }
 
 .map-view {
+  flex: 1;
   height: 100%;
-  width: 70%;
+  min-width: 0;
+}
+
+/* ── Leaflet popup overrides ── */
+.leaflet-popup-content-wrapper {
+  border-radius: 10px !important;
+  box-shadow: 0 6px 24px rgba(0, 61, 165, 0.18) !important;
+  border: 1px solid rgba(0, 61, 165, 0.1) !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  line-height: 1.5;
+}
+
+.leaflet-popup-tip {
+  box-shadow: none !important;
+}
+
+.leaflet-popup-close-button {
+  top: 8px !important;
+  right: 10px !important;
+  color: #888 !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+}
+
+.leaflet-popup-close-button:hover {
+  color: #003DA5 !important;
+  background: none !important;
+}
+
+/* ── Popup card content ── */
+.popup-header {
+  background: #003DA5;
+  color: white;
+  padding: 8px 36px 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+.popup-body {
+  padding: 10px 14px 12px;
+}
+
+.popup-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.popup-row:first-child {
+  margin-top: 0;
+}
+
+.popup-label {
+  color: #777;
+  white-space: nowrap;
+}
+
+.popup-value {
+  color: #222;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.popup-route-number {
+  font-size: 22px;
+  font-weight: 800;
+  color: #003DA5;
+  line-height: 1;
+}
+
+.popup-direction {
+  font-size: 12px;
+  color: #555;
+  margin-top: 4px;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Pulsing marker for active POI */
+.pulsing-marker {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #003DA5;
+  border: 3px solid white;
+  box-shadow: 0 0 0 3px #003DA5, 0 2px 8px rgba(0, 0, 0, 0.35);
+  animation: pulse-poi 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse-poi {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
 }
